@@ -15,9 +15,9 @@ class AutomaticWeightedLoss(nn.Module):
         awl = AutomaticWeightedLoss(2)
         loss_sum = awl(loss1, loss2)
     """
-    def __init__(self, num):
+    def __init__(self, num=2):
         super(AutomaticWeightedLoss, self).__init__()
-        params = torch.ones(num=2, requires_grad=True)
+        params = torch.ones(num, requires_grad=True)
         self.params = torch.nn.Parameter(params)
 
     def forward(self, *x):
