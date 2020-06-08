@@ -22,7 +22,7 @@ git clone git@github.com:Mikoto10032/AutomaticWeightedLoss.git
 ```python
 from AutomaticWeightedLoss import AutomaticWeightedLoss
 
-awl = AutomaticWeightedLoss(2)
+awl = AutomaticWeightedLoss(2)	# we have 2 losses
 loss1 = 1
 loss2 = 2
 loss_sum = awl(loss1, loss2)
@@ -35,9 +35,42 @@ from torch import optim
 
 model = Model()
 optimizer = optim.Adam([
-                {'params': net.parameters()},
+                {'params': model.parameters()},
                 {'params': awl.parameters()}
             ])
+```
+
+* A complete example
+
+```python
+from torch import optim
+from AutomaticWeightedLoss import AutomaticWeightedLoss
+
+model = Model()
+
+awl = AutomaticWeightedLoss(2)	# we have 2 losses
+loss_1 = ...
+loss_2 = ...
+
+# learnable parameters
+optimizer = optim.Adam([
+                {'params': model.parameters()},
+                {'params': awl.parameters()}
+            ])
+
+for i in range(epoch):
+    for data, label1, label2 in data_loader:
+        # forward
+        pred1, pred2 = Model(data)	
+        # calculate losses
+        loss1 = loss_1(pred1, label1)
+        loss2 = loes_2(pred2, label2)
+        # weigh losses
+        loss_sum = awl(loss1, loss2)
+        # backward
+        optimizer.zero_grad()
+        loss_sum.backward()
+        optimizer.step()
 ```
 
 ## Something to Say
