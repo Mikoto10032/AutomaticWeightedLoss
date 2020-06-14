@@ -36,7 +36,7 @@ from torch import optim
 model = Model()
 optimizer = optim.Adam([
                 {'params': model.parameters()},
-                {'params': awl.parameters()}
+                {'params': awl.parameters(), 'weight_decay': 0}	
             ])
 ```
 
