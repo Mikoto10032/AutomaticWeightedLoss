@@ -55,7 +55,7 @@ loss_2 = ...
 # learnable parameters
 optimizer = optim.Adam([
                 {'params': model.parameters()},
-                {'params': awl.parameters()}
+                {'params': awl.parameters(), 'weight_decay': 0}
             ])
 
 for i in range(epoch):
