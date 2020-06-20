@@ -64,7 +64,7 @@ for i in range(epoch):
         pred1, pred2 = Model(data)	
         # calculate losses
         loss1 = loss_1(pred1, label1)
-        loss2 = loes_2(pred2, label2)
+        loss2 = loss_2(pred2, label2)
         # weigh losses
         loss_sum = awl(loss1, loss2)
         # backward
